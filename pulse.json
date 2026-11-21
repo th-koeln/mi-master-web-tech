@@ -1,0 +1,27 @@
+---
+layout: null
+sitemap: false
+# JSON-Feed aller Workshops, z. B. für die Anzeige auf der ME-Website.
+# Schema wie pulse.json der alten Seite (th-koeln/mi-master-wtw), damit Abnehmer nur die URL tauschen müssen.
+---
+[
+{%- assign workshops = site.workshops | sort: "datum" | reverse %}
+{%- for item in workshops %}
+  {
+    "title": {{ item.titel | prepend: "Workshop: " | jsonify }},
+    "date": {{ item.datum | date: "%Y-%m-%d" | jsonify }},
+    "termin": {{ item.termin | append: "" | jsonify }},
+    "autor": {{ item.autor | append: "" | jsonify }},
+    "raum": {{ item.raum | append: "" | jsonify }},
+    "dauer": {{ item.dauer | append: "" | jsonify }},
+    "art": {{ item.art | append: "" | jsonify }},
+    "bild": {{ item.url | append: item.bild | absolute_url | jsonify }},
+    "bildcredits": {{ item.bildcredits | append: "" | jsonify }},
+    "url": {{ item.url | absolute_url | jsonify }},
+    "id": {{ item.id | jsonify }},
+    "category": {{ item.category | append: "" | jsonify }},
+    "collection": {{ item.collection | jsonify }},
+    "tags": {{ item.tags | join: "" | jsonify }}
+  }{% unless forloop.last %},{% endunless %}
+{%- endfor %}
+]

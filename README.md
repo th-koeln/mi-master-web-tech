@@ -21,6 +21,7 @@ Danach ist die Seite unter <http://localhost:4000/mi-master-web-tech/> erreichba
 | Semester (für Startseite, Zeitplan und iCal) | `semester` in `_config.yml` |
 | Zeitplan | eine Datei pro Termin in `_termine/`. Felder: `woche`, `datum`, `titel`, `typ` (`seminar`, `workshop`, `keine`, `pruefung`), `dauer`, `vortragende`, `raum`, `workshop`. Hat ein Termin Text oder einen `workshop`, wird er im Zeitplan verlinkt. |
 | Kalenderdatei | `zeitplan.ics` wird automatisch aus `_termine/` erzeugt |
+| JSON-Feed der Workshops (z. B. für die ME-Website) | `pulse.json` wird automatisch aus `_workshops/` erzeugt, gleiches Schema wie bei der alten Seite: https://th-koeln.github.io/mi-master-web-tech/pulse.json |
 | Workshop-Abstracts | `_workshops/<Jahr>/<kurzname>/index.md`, Vorlage in `_workshops/vorlage/` |
 | Beiboot-Themen pro Semester | `_data/beiboot.yml` |
 | Beiboot-Ergebnisse | `_beiboot/<semester-id>/<kurzname>/index.md`, Vorlage in `_beiboot/vorlage/` |
