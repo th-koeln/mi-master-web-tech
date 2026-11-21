@@ -1,0 +1,74 @@
+---
+layout: default
+title: Projekte
+headerClass: is-small
+permalink: /projekte/
+---
+<section class="section">
+  <div class="content">
+    <h2 class="title">Projekte</h2>
+  </div>
+  <div class="content" data-grid>
+    <div class="text-hero">
+      <p>Das <strong>Beiboot-Projekt</strong> läuft parallel zum Modul. Alle arbeiten am selben Thema, und alle zwei bis drei Wochen kommt ein neues Feature hinzu. So wird sichtbar, wie unterschiedlich Entwickler:innen dieselbe Anforderung umsetzen. Auf dieser Seite sind die Projektthemen und die Ergebnisse der letzten Durchläufe dokumentiert.</p>
+    </div>
+
+    <h2>Wie läuft das Beiboot-Projekt ab?</h2>
+    <p>Zum Start wird ein grobes Projektthema vorgegeben. Danach veröffentlichen wir in regelmäßigen Abständen Issues mit neuen Features, die Sie in Ihr Projekt integrieren. In der Veranstaltung stellen wir Code vor, führen Reviews durch und diskutieren Technologie- und Implementierungsentscheidungen.</p>
+    <p>Das Beiboot-Projekt hilft Ihnen, die eigenen Skills realistisch einzuschätzen, und liefert Inspiration für alternative Lösungsansätze. Nebenbei bauen Sie Kompetenzen in Kooperation und Qualitätssicherung auf.</p>
+
+    <h2>Was wird erwartet?</h2>
+    <ul>
+      <li>Sie liefern die Issues im Takt ab und halten Zeitvorgaben ein oder begründen, warum Sie sie überschreiten.</li>
+      <li>Sie dokumentieren für jedes Issue den tatsächlichen Zeitaufwand und reflektieren ihn.</li>
+      <li>Sie treffen Technologieentscheidungen bewusst, begründen sie und halten sie in Decision Records fest.</li>
+      <li>Ihr Code ist so strukturiert, benannt und kommentiert, dass Dritte ihn starten, verstehen und erweitern können.</li>
+      <li>Sie sichern die Qualität aktiv, etwa durch Tests, Linting oder Code-Reviews.</li>
+      <li>Sie nutzen die Werkzeuge der Git-Forge konsequent: aussagekräftige Commits, Issues, Branches und Pull Requests.</li>
+      <li>Sie dokumentieren Entscheidungen, Schwierigkeiten und Lernmomente so, dass Dritte Ihren Weg nachvollziehen können.</li>
+      <li>Sie bringen Ihre Lösung aktiv in die Reviews ein und vergleichen sie mit anderen Ansätzen.</li>
+      <li>Am Ende steht ein eigenständiges Projekt, das technisch solide und gut dokumentiert ist.</li>
+    </ul>
+    <p>Die Niveaustufen finden Sie unter <a href="{{ '/bewertungskriterien/#beiboot-projekt' | relative_url }}">Bewertungskriterien Beiboot-Projekt</a>.</p>
+
+    <h2>Rahmenbedingungen für das Repository</h2>
+    <ul>
+      <li>Das Projekt liegt in einem Git-Repository, und Sie nutzen die Werkzeuge der Git-Forge (Issues, Pull Requests, Projects).</li>
+      <li>Das Repository ist in der Regel öffentlich und mit einer Lizenz versehen.</li>
+      <li>Laden Sie die Betreuenden in das Repository ein.</li>
+      <li>Die Dokumentation liegt im Repository, als Wiki oder in Markdown-Dateien. Bitte verwenden Sie keine proprietären Formate wie PDF oder DOC.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section projects-overview">
+  {%- for s in site.data.beiboot %}
+  {%- assign ergebnisse = site.beiboot | where: "semester", s.id | where_exp: "e", "e.published != false" | sort: "titel" %}
+  <div class="project-year-group" id="{{ s.id }}">
+    <h3 class="project-title">{{ s.thema }}</h3>
+    <p class="project-year">{{ s.semester }}</p>
+    <div class="beiboot-text">
+      <p class="beiboot-summary">{{ s.beschreibung }}</p>
+      <div class="beiboot-history">
+        {%- if s.entwicklung %}
+        <p>{{ s.entwicklung }}</p>
+        {%- endif %}
+        {%- if s.repo %}
+        <p><a href="{{ s.repo }}/issues?q=is%3Aissue">Zu den Issues auf GitHub</a></p>
+        {%- endif %}
+      </div>
+    </div>
+    {%- if ergebnisse.size > 0 %}
+    <h4 class="project-results">Ergebnisse</h4>
+    <ul class="project-list">
+      {%- for e in ergebnisse %}
+      <li class="project-item"><a class="wrap" href="{{ e.url | relative_url }}"><figure>
+        {%- if e.bild %}<img src="{{ e.url | replace: '/index/', '/' | append: e.bild | relative_url }}" alt="" loading="lazy">{% endif %}
+        <figcaption><strong>{{ e.titel }}</strong><br>{{ e.autor }}</figcaption>
+      </figure></a></li>
+      {%- endfor %}
+    </ul>
+    {%- endif %}
+  </div>
+  {%- endfor %}
+</section>

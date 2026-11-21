@@ -1,0 +1,180 @@
+# Ein Eintrag pro Semester, neuestes zuerst.
+# id verknüpft das Semester mit den Ergebnissen in _beiboot/ (Feld "semester").
+# entwicklung: der Projektverlauf als kurzer Fließtext (wird angezeigt)
+# verlauf: Stichworte zu den Issues in ihrer Reihenfolge (nur Arbeitsnotiz, wird nicht angezeigt)
+# Quelle ist jeweils das Themen-Repo in mi-classroom.
+
+- id: ss2026
+  semester: Sommersemester 2026
+  thema: Körperdaten als Browser-Events
+  repo: https://github.com/mi-classroom/mi-master-wt-beiboot-2026
+  beschreibung: >-
+    Im Projekt entsteht eine wiederverwendbare, dokumentierte JavaScript-Library, die Körperdaten
+    per Machine Learning im Browser aus dem Kamerabild erkennt und als Custom Browser Events
+    bereitstellt. So kann jede Web-Anwendung mit einem einfachen addEventListener auf Hände,
+    Gesten, Pose oder Nähe reagieren. Entscheidungen werden in Architectural Decision Records
+    festgehalten, und die Anwendung soll gerade am Anfang möglichst schlank bleiben.
+  entwicklung: >-
+    Den Anfang machte ein Proof of Concept: die Kamera zum Sprechen bringen, Körperdaten live im
+    Browser anzeigen und herausfinden, was davon verlässlich ist und was Rauschen. Danach ging es um
+    die Frage, wann eine Bewegung eine Geste ist. Ein Gestenvokabular bildete typische Interaktionen
+    auf Gesten im Nah- und Fernbereich ab, und erste Gesten wurden aus den Rohdaten erkannt. Aus
+    diesen Prototypen entstand eine Library mit gekapselter Erkennung, öffentlicher API und
+    Dokumentation. Wie gut diese API trägt, zeigte sich im nächsten Schritt: Eine eigene Anwendung
+    durfte die Library nur über ihre Schnittstelle nutzen, wahlweise auch die Library einer anderen
+    Person. Zum Abschluss entschieden sich alle für eine Vision-Anwendung oder für die gründliche
+    Lösung einer Schwachstelle, deployt und in einem kurzen Video vorgestellt.
+  verlauf:
+    - Proof of Concept
+    - Gestenvokabular
+    - Library
+    - Anwendung
+    - Vision oder Vertiefung
+
+- id: ss2025
+  semester: Sommersemester 2025
+  thema: IPTC-Editor
+  repo: https://github.com/mi-classroom/mi-master-wt-beiboot-2025
+  beschreibung: >-
+    Im Projekt entsteht eine Client-Server-Anwendung, mit der sich IPTC-Metadaten von Bildern
+    schnell und einfach pflegen lassen. Neben der Technik steht diesmal auch die Gestaltung der
+    Interaktion im Mittelpunkt: Das Konzept für die Bearbeitung entwickeln alle selbst und setzen
+    es anschließend um. Entscheidungen werden in Architectural Decision Records festgehalten.
+  entwicklung: >-
+    Den Anfang machte das Backend: eine API, die IPTC-Daten aus gängigen Bildformaten liest und
+    zurückschreibt. Danach kam das Frontend dazu, mit Upload einzelner und mehrerer Bilder, einer
+    Galerie und einem vorgegebenen Styleguide. Im Mittelpunkt stand dann die Frage, wie sich
+    Metadaten komfortabel bearbeiten lassen. Alle entwickelten ein eigenes Interaktionskonzept, etwa
+    mit Autovervollständigung und Mehrfachbearbeitung, und setzten es im nächsten Schritt um. Zum
+    Abschluss kam ein selbst gewähltes Feature hinzu, und die Anwendung wurde so abgerundet und
+    dokumentiert, dass Dritte sie nutzen können.
+  verlauf:
+    - Backend-API
+    - Upload
+    - Interaktionskonzept
+    - Umsetzung
+    - Eigenes Feature
+    - Finetuning
+
+- id: ss2024
+  semester: Sommersemester 2024
+  thema: Langzeitbelichtung aus Videos
+  repo: https://github.com/mi-classroom/mi-master-wt-beiboot-2024
+  beschreibung: >-
+    Im Projekt entsteht eine Client-Server-Anwendung, mit der sich Bilder mit Langzeitbelichtung
+    einfach nachstellen lassen. Ausgangspunkt ist ein Film: Er wird in Einzelbilder zerlegt, die
+    dann mit verschiedenen Blendmodes zu einem Bild montiert werden. So lässt sich das Endergebnis
+    viel genauer steuern als mit einer echten Langzeitbelichtung.
+  entwicklung: >-
+    Den Anfang machte die Kernfunktion im Backend: einen Film hochladen, in Einzelbilder zerlegen
+    und wieder zu einem Bild montieren, mit Experimenten zu Motiven, Blendmodes und Frameraten.
+    Danach ging es um Kontrolle über das Ergebnis. Zuerst ließen sich Einzelbilder und ganze
+    Passagen ausschließen, dann einzelne Schlüsselbilder hervorheben, um bestimmte Phasen sichtbar
+    zu machen. Mit einem Review Buddy und einer Docker-Umgebung wurde das Projekt anschließend für
+    andere zugänglich. Zum Abschluss kam ein selbst gewähltes Feature hinzu, und die Anwendung wurde
+    für Dritte dokumentiert und in einem kurzen Screenmovie vorgestellt.
+  verlauf:
+    - Backend
+    - Bildauswahl
+    - Schlüsselbilder
+    - Review-Prozess
+    - Eigenes Feature
+    - Finetuning
+
+- id: ss2023
+  semester: Sommersemester 2023
+  thema: Augmented Reality im Browser
+  repo: https://github.com/mi-classroom/mi-master-wt-beiboot-2023
+  beschreibung: >-
+    Im Projekt entstehen Bausteine für eine WebAR-Anwendung, die vor allem auf dem Smartphone
+    genutzt wird. Das Thema lehnt sich an das Vorhaben „ARlebnispfade Oberbergischer Kreis“ an:
+    Inhalte erscheinen an Markern, erkannten Objekten oder GPS-Koordinaten im Raum.
+  entwicklung: >-
+    Den Anfang machte eine Basisversion: Objekte, Texte und Klänge erschienen an Markern oder
+    GPS-Koordinaten im Raum und wurden systematisch getestet, etwa auf Abstand, Winkel, Licht und
+    Genauigkeit. Danach wurde das Projekt mit einem Review Buddy und einer Docker-Umgebung für
+    andere zugänglich. Im nächsten Schritt kam Interaktion hinzu, zum Beispiel AR-Elemente, die auf
+    Distanz reagieren oder aufeinander einwirken. Zum Abschluss entstand auf Basis eines
+    vorgegebenen Layouts eine Smartphone-Anwendung, die mindestens zwei eigene AR-Demos bündelt und
+    sich um weitere ARlebnisse erweitern lässt.
+  verlauf:
+    - Basisversion
+    - Review-Prozess
+    - Interaktion
+    - Demoanwendung
+
+- id: ss2022
+  semester: Sommersemester 2022
+  thema: Cranach-Meisterwerke im 3D-Raum
+  repo: https://github.com/mi-classroom/mi-master-wt-beiboot-2022
+  beschreibung: >-
+    Im Projekt entsteht eine Browser-Anwendung, mit der sich die Meisterwerke von Lucas Cranach
+    erkunden lassen. Die Werke werden in einem dreidimensionalen Raum dargestellt, um die Bezüge
+    zwischen einzelnen Werken und Werkgruppen erfahrbar zu machen. Die Anwendung ist ein Showcase
+    für alternative Darstellungsformen des komplexen Werks.
+  entwicklung: >-
+    Den Anfang machte eine klassische Übersicht der Meisterwerke mit Vorschaubild, Titel, Datierung
+    und Besitzer, gespeist aus dem Datenpaket des Cranach Digital Archive. Danach wurde das Projekt
+    mit einem Review Buddy und einer Docker-Umgebung für andere zugänglich. Dann kam die dritte
+    Dimension: Ein Zeitstrahl in die Tiefe zeigte Zeitraum, Dichte und Größenverhältnisse der Werke,
+    die sich erst aus sehr uneinheitlichen Maßangaben ableiten ließen. Anschließend wurden verwandte
+    Werke entlang der anderen Achsen eingereiht und mit dem Archiv verknüpft. Zum Abschluss ging es
+    darum, die Bezüge zwischen den Werken mit einer eigenen Erweiterung noch erfahrbarer zu machen.
+  verlauf:
+    - Übersicht
+    - Review-Prozess
+    - 3D-Zeitstrahl
+    - Relationen
+    - Explore more
+
+- id: ss2021
+  semester: Sommersemester 2021
+  thema: Werkzeug für die Bildredaktion
+  repo: https://github.com/mi-classroom/mi-master-wt-beiboot-2021
+  beschreibung: >-
+    Im Projekt entsteht eine kleine Client-Server-Anwendung, mit der Bildredakteur:innen Bilder
+    und ihre Exif- und IPTC-Daten durchsuchen, prüfen und ändern können, ausgelegt auf rund 5000
+    Artefakte. Im Vordergrund steht die schrittweise Weiterentwicklung: ausprobieren, vergleichen,
+    refaktorieren und die Freude an lauffähigem Code.
+  entwicklung: >-
+    Den Anfang machten Client und Server, die Bildverzeichnisse auslesen und Bilder mit ihren
+    Metadaten anzeigen. Danach wurde das Projekt mit einem Review Buddy und einer Docker-Umgebung
+    für andere zugänglich, die Bilder blieben dabei als Volume außerhalb des Containers. Die
+    folgenden Schritte kamen jeweils als User Story aus der Bildredaktion: eine Stichwortsuche über
+    rund 5000 Artefakte, eine Ansicht der JSON-Strukturdaten und das Ändern von IPTC-Feldern. Zum
+    Abschluss ließen sich Artefakte als Zip-Datei herunterladen, und die vorgegebenen Mockups wurden
+    mit einer CSS-Methodik wie BEM oder CUBE CSS umgesetzt.
+  verlauf:
+    - Basis
+    - Dev-Prozess
+    - Suche
+    - JSON-Ansicht
+    - IPTC bearbeiten
+    - Download
+    - Design
+
+- id: ss2020
+  semester: Sommersemester 2020
+  thema: Bildverarbeitung mit REST-API und PWA
+  repo: https://github.com/mi-classroom/mi-master-wt-beiboot-2020
+  beschreibung: >-
+    Im Projekt entsteht eine kleine Web-Anwendung für die Verarbeitung von Bildern: vom Upload
+    über eine Farbanalyse bis zu einer REST-API. Ein Schwerpunkt liegt darauf, das Projekt für
+    andere zu öffnen, mit Docker, Konventionen und Beispieldaten. Zum Abschluss entsteht eine
+    Progressive Web App im Projekt einer anderen Person.
+  entwicklung: >-
+    Den Anfang machte ein Bild-Upload mit Skalierung auf mehrere Größen, danach eine serverseitige
+    Analyse der Hauptfarben jedes Bildes. Ein großer Teil des Semesters drehte sich dann darum, das
+    Projekt für andere zu öffnen: mit Docker, Code of Conduct, Konventionen und Beispieldaten auf
+    Knopfdruck, bis hin zu einem Praxistest, bei dem eine andere Person das Projekt aufsetzt und ein
+    Feature beisteuert. Anschließend kamen eine REST-API mit Sortierung nach Farbe und eine eigene
+    Umgebung für die Frontend-Entwicklung hinzu. Zum Abschluss entstand eine „Quote of the Day“-PWA,
+    und zwar im Projekt einer anderen Person.
+  verlauf:
+    - Upload
+    - Farbanalyse
+    - Kooperation
+    - Scaffolding
+    - REST-API
+    - Frontend-Umgebung
+    - PWA

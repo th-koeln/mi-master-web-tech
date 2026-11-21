@@ -1,0 +1,22 @@
+<header class="main-header {{ page.headerClass }} {{ layout.headerClass }}">
+  <a href="{{ '/' | relative_url }}" class="nav-logo"><img src="{{ '/assets/images/box.png' | relative_url }}" alt="Logo der Medieninformatik an der TH Köln: eine schöne Kiste voller Möglichkeiten"></a>
+
+  <nav class="main-navigation" data-js-menu-state="menu-is-closed" aria-label="Hauptnavigation">
+    <button class="menu-button" data-js-menu aria-label="Menü" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <ul class="navigation-list">
+      {%- for item in site.data.navigation %}
+      <li><a class="nav-item" href="{{ item.url | relative_url }}">{{ item.titel }}</a></li>
+      {%- endfor %}
+    </ul>
+  </nav>
+
+  <div class="header-stage">
+    <h1 class="title"><span lang="en">Web Techno&shy;logies</span><span class="is-blue">/</span><br><span class="is-black">Web-Techno&shy;logien</span></h1>
+    <h2 class="subtitle">{{ site.description }}</h2>
+  </div>
+</header>

@@ -1,0 +1,49 @@
+title: Web Technologies / Web-Technologien
+description: Master Medieninformatik und Master Digital Sciences am Campus Gummersbach
+lang: de
+
+url: https://th-koeln.github.io
+baseurl: /mi-master-web-tech
+repository: th-koeln/mi-master-web-tech
+branch: main
+
+timezone: Europe/Berlin
+permalink: /:title/
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  parse_block_html: true
+  syntax_highlighter: rouge
+
+# Semester, auf das sich Startseite und Zeitplan beziehen
+semester: Sommersemester 2027
+
+collections:
+  workshops:
+    output: true
+    # Alte URL-Struktur beibehalten, damit relative Pfade (../bild.png, ../material/) weiter funktionieren
+    permalink: /:collection/:path/
+  termine:
+    output: true
+    permalink: /zeitplan/:name/
+  beiboot:
+    output: true
+    permalink: /projekte/:path/
+
+defaults:
+  - scope: { path: "", type: workshops }
+    values: { layout: workshop }
+  - scope: { path: "", type: termine }
+    values: { layout: termin }
+  - scope: { path: "", type: beiboot }
+    values: { layout: beiboot }
+  - scope: { path: "" }
+    values: { layout: page }
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - node_modules

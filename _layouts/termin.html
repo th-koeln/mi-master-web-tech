@@ -1,0 +1,35 @@
+---
+layout: default
+headerClass: is-small
+---
+{%- include datum.html datum=page.datum -%}
+<section class="section">
+  <div class="content">
+    <h2 class="title">{{ page.titel }}</h2>
+    <div class="text-hero"><p>{{ datum_schoen }}, {{ page.datum | date: "%H:%M" }} Uhr</p></div>
+  </div>
+  <div class="content" data-grid>
+    <dl class="overview">
+      <dt>Woche</dt>
+      <dd>{{ page.woche }}</dd>
+      {%- if page.dauer %}
+      <dt>Dauer</dt>
+      <dd>{{ page.dauer }} Minuten</dd>
+      {%- endif %}
+      {%- if page.raum %}
+      <dt>Ort</dt>
+      <dd>{% if page.raum contains "Online" %}{{ page.raum }} (Zugangsdaten auf dem Miro-Board){% else %}Raum {{ page.raum }}{% endif %}</dd>
+      {%- endif %}
+      {%- if page.vortragende %}
+      <dt>Verantwortlich</dt>
+      <dd>{{ page.vortragende }}</dd>
+      {%- endif %}
+      {%- if page.workshop %}
+      <dt>Workshop</dt>
+      <dd><a href="{{ '/workshops/' | append: page.workshop | append: '/index/' | relative_url }}">Abstract lesen</a></dd>
+      {%- endif %}
+    </dl>
+    {{ content }}
+    <p><a href="{{ '/zeitplan/' | relative_url }}#woche-{{ page.woche }}">Zurück zum Zeitplan</a></p>
+  </div>
+</section>

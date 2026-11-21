@@ -1,0 +1,35 @@
+---
+layout: default
+headerClass: is-small
+---
+{%- assign s = site.data.beiboot | where: "id", page.semester | first -%}
+<section class="section">
+  <div class="content">
+    <h2 class="title">{{ page.titel }}</h2>
+    <div class="text-hero"><p>Beiboot-Projekt von {{ page.autor }}</p></div>
+  </div>
+  <div class="content" data-grid>
+    {%- if page.bild %}
+    <img class="detail-image" src="../{{ page.bild }}" alt="">
+    {%- endif %}
+    <dl class="overview">
+      {%- if s %}
+      <dt>Semester</dt>
+      <dd><a href="{{ '/projekte/' | relative_url }}#{{ s.id }}">{{ s.semester }}</a></dd>
+      {%- endif %}
+      {%- if page.keywords %}
+      <dt>Keywords</dt>
+      <dd>{{ page.keywords | join: ", " }}</dd>
+      {%- endif %}
+      {%- if page.demo %}
+      <dt>Live-Demo</dt>
+      <dd><a href="{{ page.demo }}">{{ page.demo }}</a></dd>
+      {%- endif %}
+      {%- if page.repo %}
+      <dt>Repository</dt>
+      <dd><a href="{{ page.repo }}">{{ page.repo }}</a></dd>
+      {%- endif %}
+    </dl>
+    {{ content }}
+  </div>
+</section>

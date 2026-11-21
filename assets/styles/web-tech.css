@@ -1,0 +1,136 @@
+/* Ergänzungen für die Website Web-Technologien
+   Alles andere stammt unverändert aus dem Screendesign-Repo (th-koeln/mi-bachelor-screendesign).
+############################################################################ */
+
+/* Screendesign setzt Sektionen direkt in den body, hier liegen sie in main */
+main > section {
+  margin: var(--fluid-space-m);
+}
+
+/* Eckdaten auf Detailseiten */
+.content .overview {
+  max-width: var(--max-width-content);
+  margin-bottom: var(--fluid-space-l);
+}
+
+/* Vorschaubild auf Detailseiten nicht größer als die Textspalte */
+.content img.detail-image {
+  max-width: var(--max-width-content);
+  margin-top: 0;
+  border: solid 1px var(--color-darken);
+}
+
+/* Abstracts beginnen oft mit einer h1: wie eine h2 behandeln */
+.content h1 {
+  font-size: var(--size-xl);
+  font-weight: var(--fw-medium);
+  color: var(--headline-color);
+  text-wrap: balance;
+}
+
+/* Code in Abstracts und Unterseiten */
+.content pre,
+.content code {
+  font-family: "Courier New", Courier, monospace;
+}
+
+.content pre {
+  max-width: var(--max-width-content);
+  padding: var(--size-m);
+  overflow-x: auto;
+  background-color: var(--color-darken-light);
+}
+
+/* Links in der Projektliste: kein Unterstrich-Hover wie bei Fließtextlinks */
+.project-list .project-item a {
+  color: inherit;
+}
+
+.project-list .project-item figcaption strong {
+  font-weight: var(--fw-medium);
+}
+
+/* Workshop-Übersicht: Jahreszahl als ruhige, große Marke */
+#workshops .project-year {
+  margin-bottom: var(--fluid-space-s);
+}
+
+/* Grafik auf der Seite Workshop-Tipps */
+.content .diagram img {
+  margin-top: 0;
+  margin-bottom: var(--space-xs);
+}
+
+.content .diagram figcaption {
+  color: var(--color-dark);
+  font-size: var(--size-s);
+}
+
+/* Sichtbarer Fokus für Tastaturbedienung */
+a:focus-visible,
+button:focus-visible {
+  outline: solid var(--border-width) var(--interaction-color);
+  outline-offset: var(--border-width);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .project-list .project-item {
+    transition: none;
+  }
+}
+
+/* Großer Titel: nur an der gesetzten Trennstelle (&shy;) umbrechen */
+.main-header .title {
+  hyphens: manual;
+}
+
+/* h4 in Abstracts und Bewertungskriterien unter der h3 einordnen */
+.content h4 {
+  font-size: var(--base-font-size);
+  color: var(--color-dark);
+}
+
+/* Kopf: zwei Titelzeilen (englisch/deutsch), daher kleiner als bei Screendesign */
+.main-header .title {
+  font-size: clamp(1.4rem, 3.8vw + 0.5rem, 8rem);
+}
+
+.main-header.is-small .title {
+  font-size: clamp(1.2rem, 2.2vw + 0.6rem, 4.5rem);
+}
+
+.project-results {
+  margin-top: var(--fluid-space-l);
+  font-size: var(--size-xl);
+  font-weight: var(--fw-medium);
+}
+
+/* Projekte: Beschreibung links (fett), Ablauf und Issue-Link rechts, beide in Grundschriftgröße */
+.beiboot-text {
+  display: grid;
+  gap: var(--fluid-space-s) var(--fluid-space-l);
+  margin-bottom: var(--fluid-space-m);
+
+  @media screen and (min-width: 64rem) {
+    grid-template-columns: 1fr 1fr;
+    max-width: calc(var(--max-width-content) * 2);
+  }
+
+  .beiboot-summary,
+  .beiboot-history p {
+    font-size: var(--base-font-size);
+    line-height: var(--lh-text);
+  }
+
+  .beiboot-summary {
+    font-weight: var(--fw-medium);
+  }
+
+  .beiboot-history p + p {
+    margin-top: var(--space-m);
+  }
+}

@@ -1,0 +1,11 @@
+<footer class="main-footer">
+  <div class="content">
+    <ul class="nav-list">
+      {%- for item in site.data.navigation %}
+      <li><a class="nav-item" href="{{ item.url | relative_url }}">{{ item.titel }}</a></li>
+      {%- endfor %}
+    </ul>
+
+    <p>Modulseite zum Modul <strong>Web-Technologien</strong> in den Studiengängen <a href="https://www.th-koeln.de/studium/medieninformatik-master_3729.php">Medieninformatik Master</a> und <a href="https://www.th-koeln.de/studium/digital-sciences-master_83002.php">Digital Sciences Master</a> der <a href="https://www.th-koeln.de/hochschule/impressum_8159.php">TH Köln</a>. Verantwortlicher Dozent ist <a href="https://www.th-koeln.de/personen/christian.noss/">Prof. Christian Noss</a>. Der Quellcode liegt auf <a href="https://github.com/{{ site.repository }}">GitHub</a>.</p>
+  </div>
+</footer>

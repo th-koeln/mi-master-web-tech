@@ -1,0 +1,11 @@
+{%- comment -%}
+  Kachel für einen Workshop im Stil der Screendesign-Projektliste. Parameter: workshop
+  Bildpfade stehen in den Abstracts relativ zur Detailseite (../bild.png).
+{%- endcomment -%}
+{%- assign w = include.workshop -%}
+{%- assign w_dir = w.url | replace: "/index/", "/" -%}
+{%- assign w_bild = w.bild | remove_first: "../" -%}
+<li class="project-item"><a class="wrap" href="{{ w.url | relative_url }}"><figure>
+  <img src="{{ w_dir | append: w_bild | relative_url }}" alt="" loading="lazy">
+  <figcaption><strong>{{ w.titel }}</strong><br>{{ w.autor }}</figcaption>
+</figure></a></li>

@@ -1,0 +1,43 @@
+---
+layout: default
+title: Zeitplan
+headerClass: is-small
+permalink: /zeitplan/
+---
+{%- assign termine = site.termine | sort: "datum" -%}
+<section class="section" data-content="timetable">
+  <div class="content">
+    <h2 class="title">Zeitplan</h2>
+    <div class="text-hero">
+      <p>Die Veranstaltung findet im {{ site.semester }} dienstags statt. Präsenztermine sind in Raum 3.215 am Campus Gummersbach, die Zugangsdaten für Online-Termine stehen auf dem Miro-Board, das im ILU verlinkt ist. Alle Termine gibt es auch als <a href="{{ '/zeitplan.ics' | relative_url }}">Kalenderdatei (iCal)</a>.</p>
+    </div>
+
+    {%- for t in termine %}
+    {%- include datum.html datum=t.datum %}
+    {%- assign inhalt = t.content | strip_html | strip %}
+    <div class="event-list-day" data-date="{{ t.datum | date: '%Y-%m-%d' }}" id="woche-{{ t.woche }}">
+      <h3>{{ datum_schoen }}</h3>
+      <ul class="event-list-item">
+        {%- if t.typ == "keine" %}
+        <li>keine Veranstaltung</li>
+        {%- else %}
+        <li>
+          <span class="event-time">{{ t.datum | date: "%H:%M" }}</span>
+          <span class="event-title">{{ t.titel }}</span>
+          <dl class="event-data">
+            <dt>Woche</dt><dd>{{ t.woche }}</dd>
+            {%- if t.vortragende %}<dt>Verantwortlich</dt><dd>{{ t.vortragende }}</dd>{% endif %}
+            {%- if t.raum %}<dt>Ort</dt><dd>{% if t.raum contains "Online" %}{{ t.raum }}{% else %}Raum {{ t.raum }}{% endif %}</dd>{% endif %}
+            {%- if t.dauer %}<dt>Dauer</dt><dd>{{ t.dauer }} Minuten</dd>{% endif %}
+          </dl>
+          {%- if inhalt != "" or t.workshop %}
+          <p><a href="{{ t.url | relative_url }}">mehr</a></p>
+          {%- endif %}
+        </li>
+        {%- endif %}
+      </ul>
+    </div>
+    {%- endfor %}
+  </div>
+  <button type="button" class="goto-today" hidden>Gehe zum nächsten Termin</button>
+</section>

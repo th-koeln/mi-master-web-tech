@@ -1,0 +1,38 @@
+---
+layout: default
+headerClass: is-small
+---
+<section class="section">
+  <div class="content">
+    <h2 class="title">{{ page.titel }}</h2>
+    <div class="text-hero"><p>Workshop von {{ page.autor }}</p></div>
+  </div>
+  <div class="content" data-grid>
+    {%- if page.bild %}
+    <img class="detail-image" src="{{ page.bild }}" alt="">
+    {%- endif %}
+    <dl class="overview">
+      <dt>Termin</dt>
+      <dd>{% if page.termin %}{{ page.termin }}{% else %}{{ page.datum | date: "%d.%m.%Y" }}{% endif %}</dd>
+      {%- if page.dauer %}
+      <dt>Dauer</dt>
+      <dd>{{ page.dauer }}</dd>
+      {%- endif %}
+      {%- if page.raum %}
+      <dt>Raum</dt>
+      <dd>{{ page.raum }}</dd>
+      {%- endif %}
+      {%- if page.keywords %}
+      <dt>Keywords</dt>
+      <dd>{{ page.keywords | join: ", " }}</dd>
+      {%- endif %}
+      {%- if page.bildcredits %}
+      <dt>Bildnachweis</dt>
+      <dd>{{ page.bildcredits }}</dd>
+      {%- endif %}
+      <dt>Abstract bearbeiten</dt>
+      <dd><a href="https://github.com/{{ site.repository }}/edit/{{ site.branch }}/{{ page.path }}">auf GitHub</a></dd>
+    </dl>
+    {{ content }}
+  </div>
+</section>

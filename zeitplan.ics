@@ -1,0 +1,26 @@
+---
+layout: null
+permalink: /zeitplan.ics
+---
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//TH Koeln//Web-Technologien//DE
+CALSCALE:GREGORIAN
+X-WR-CALNAME:{{ site.title }} {{ site.semester }}
+X-WR-TIMEZONE:Europe/Berlin
+{%- assign termine = site.termine | sort: "datum" %}
+{%- for t in termine %}{% if t.typ != "keine" %}
+{%- assign start = t.datum | date: "%s" | plus: 0 %}
+{%- assign dauer = t.dauer | default: 90 | times: 60 %}
+{%- assign ende = start | plus: dauer %}
+BEGIN:VEVENT
+UID:{{ site.repository | replace: "/", "-" }}-{{ t.datum | date: "%Y%m%d" }}-{{ t.woche }}
+DTSTAMP:{{ site.time | date: "%Y%m%dT%H%M%SZ" }}
+DTSTART;TZID=Europe/Berlin:{{ t.datum | date: "%Y%m%dT%H%M00" }}
+DTEND;TZID=Europe/Berlin:{{ ende | date: "%Y%m%dT%H%M00" }}
+SUMMARY:{{ site.title }}: {{ t.titel | replace: ",", "\," }}
+LOCATION:{{ t.raum | replace: ",", "\," }}
+URL:{{ site.url }}{{ t.url | relative_url }}
+END:VEVENT
+{%- endif %}{% endfor %}
+END:VCALENDAR

@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>Docker 101</title>
+        <link rel="stylesheet" href="./css/reveal.css">
+        <link rel="stylesheet" href="./custom-themes/medieninformatik-semantic.css" id="theme">
+        <link rel="stylesheet" href="./css/highlight/Vs.css">
+        <link rel="stylesheet" href="./css/print/paper.css" type="text/css" media="print">
+
+		<script>
+		  document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] +
+		  ':35729/livereload.js?snipver=1"></' + 'script>')
+		</script>
+
+    </head>
+    <body>
+
+        <div class="reveal">
+            <div class="slides"><section  data-markdown><script type="text/template">
+
+<!-- .slide: data-background="#9313CE" -->
+<!-- .slide: class="welcome center" -->
+
+# Docker 101
+Grundlagen der Containerisierung via Docker
+
+</script></section><section  data-markdown><script type="text/template">
+
+<!-- .slide: class="simple center" -->
+
+## Agenda
+
+1. Einführung in Docker
+1. Erster Hello-World Container
+1. Docker CLI
+1. Docker Volumes
+1. Dockerfile
+1. Docker Compose
+1. Docker Networks
+
+</script></section><section ><section data-markdown><script type="text/template">
+
+<!-- .slide: data-background="img/teaser.jpg" -->
+<!-- .slide: class="image-fullscreen center" -->
+
+
+## Was sind Container? Was ist Docker?
+
+</script></section><section data-markdown><script type="text/template"><!-- .element: class="fragment" -->
+
+<!-- .slide: class="simple center" -->
+
+## Was sind Container?
+
+1. Ein Container enthält eine Anwendung mit allen Ressourcen, die diese zur Ausführung benötigt
+- Container sind isoliert ("Prozess-isoliert")<!-- .element: class="fragment" -->
+- Container sind keine VM<!-- .element: class="fragment" -->
+
+</script></section><section data-markdown><script type="text/template"><!-- .element: class="fragment" -->
+
+<!-- .slide: class="simple center" -->
+
+## Was ist Docker?
+
+- OpenSource Software zur Containervirtualisierung<!-- .element: class="fragment" -->
+- 2013 erstmals veröffentlich, seitdem steigende Bekanntheit und Bedeutung<!-- .element: class="fragment" -->
+- Docker Container haben eine Aufgabe und terminieren nach der Fertigstellung dieser<!-- .element: class="fragment" -->
+
+</script></section></section><section  data-markdown><script type="text/template">
+
+<!-- .slide: class="simple center" -->
+
+## Begriffe
+
+- Image<!-- .element: class="fragment" -->
+  - Einstiegspunkt/ Basis der Container
+  - Ergebnis der Entwicklung
+- Container<!-- .element: class="fragment" -->
+  - Ausführen eines Images
+- Host<!-- .element: class="fragment" -->
+  - System, auf dem Docker läuft
+- Docker Daemon<!-- .element: class="fragment" -->
+  - Dienst auf auf dem Host, der Container ausführt
+- Docker-Client<!-- .element: class="fragment" -->
+  - Software mit der mit Docker interagiert wird. CLI oder GUI.
+- Registry<!-- .element: class="fragment" -->
+  - Service, der Images speichert und bereitstellt
+- Repository<!-- .element: class="fragment" -->
+  - Sammlung mehrere Images mit dem selben Namen aber unterschiedlichen Tags (Bsp.: `node:11-alpine`)
+
+</script></section><section ><section data-markdown><script type="text/template">
+
+<!-- .slide: class="simple center" -->
+
+## Docker CLI
+
+`docker run -it --rm ubuntu /bin/bash`  
+
+1. **`docker`** - CLI
+1. **`run`** - Befehl
+1. **`-it --rm`** - Optionen
+1. **`ubuntu /bin/bash`** - Argumente
+
+</script></section><section data-markdown><script type="text/template"><!-- .element: class="fragment" -->
+
+<!-- .slide: class="simple center" -->
+
+## Wie lade ich Image herunter?
+
+`docker pull <image-name>`
+
+</script></section><section data-markdown><script type="text/template"><!-- .element: class="fragment" -->
+
+<!-- .slide: class="simple center" -->
+
+## Wie erstelle ich einen Container?
+
+`docker run -it ubuntu /bin/bash --name ubuntu`
+
+1. interaktiv: -it
+2. im Hintergund: --detach
+3. [uvm.](https://docs.docker.com/engine/reference/run/)
+
+</script></section><section data-markdown><script type="text/template"><!-- .element: class="fragment" -->
+
+<!-- .slide: class="simple center" -->
+
+## Weitere Befehle
+
+### Container starten
+
+`docker start <container-name>`
+
+### Container stoppen
+
+`docker start <container-name>`
+
+### Laufende Conainer auflisten
+
+`docker ps`
+
+### Mit Container verbinden
+
+`docker attach <container-name>`
+
+### Container löschen
+
+`docker rm <container-name>`
+
+</script></section><section data-markdown><script type="text/template"><!-- .element: class="fragment" -->
+
+<!-- .slide: data-background="#4952E1" -->
+<!-- .slide: class="interlude center" -->
+
+
+# Demo
+
+</script></section><section data-markdown><script type="text/template"><!-- .element: class="fragment" -->
+
+<!-- .slide: class="assignment center" -->
+
+## <i class="fa fa-pencil" aria-hidden="true"></i>1. Aufgabe: Container erstellen
+
+1. Die erste Aufgabe ist das eben gesehene Erstellen eines **`ubuntu` Containers**, diesen nach Beenden erneut zu starten und sich mit diesem zu verbinden.
+
+- Als weitere kleine Aufgabe kann nun ein **`node` Container** interaktiv gestartet werden, die Node-Shell geöffnet und damit zwei Zahlen in Variablen addiert werden (oder beliebige andere Node/JavaScript Befehle ausgeführt werden).<!-- .element: class="fragment" -->
+
+</script></section></section><section ><section data-markdown><script type="text/template">
+
+<!-- .slide: class="simple center" -->
+
+
+## Docker Volumes
+
+- Daten alle Daten sind nach Beenden eines Containers weg<!-- .element: class="fragment" -->
+- Docker Volumes ermöglichen persistente Speicherung von Daten auf dem Host-System<!-- .element: class="fragment" -->
+- Volumes können einem Ordner im Host-Dateisystem zugewiesen werden und bleiben auch nach Löschen des Containers bestehen<!-- .element: class="fragment" -->
+
+</script></section><section data-markdown><script type="text/template"><!-- .element: class="fragment" -->
+
+<!-- .slide: class="simple center" -->
+
+## Syntax
+
+Option für Docker CLI:
+
+`-v <lokales Verzeichnis>:/<Verzeichnis im Container>`
+
+</script></section><section data-markdown><script type="text/template"><!-- .element: class="fragment" -->
+
+<!-- .slide: class="assignment center" -->
+
+## <i class="fa fa-pencil" aria-hidden="true"></i>2. Aufgabe: Container mit Volume erstellen
+
+Nun soll eine `app.js`-Datei in einen Node Container eingefügt werden und der darin enthaltene Server gestartet werden.
+
+- Wie kann man auf den gestarteten Server zugreifen?<!-- .element: class="fragment" -->
+- Port muss freigegeben werden<!-- .element: class="fragment" -->
+
+</script></section><section data-markdown><script type="text/template"><!-- .element: class="fragment" -->
+
+<!-- .slide: class="simple center" -->
+
+## Portfreigaben in Docker
+
+1. Container sind isoliert, vom Host kann nicht auf sie zugegriffen werden (und umgekehrt)
+1. Einzelne Ports des Containers können auf Ports des Hosts freigegeben werden
+1. Syntax
+   1. Option: `-p <Host-Port>:<Container-Port>`
+
+</script></section><section data-markdown><script type="text/template"><!-- .element: class="fragment" -->
+
+<!-- .slide: class="assignment center" -->
+
+## <i class="fa fa-pencil" aria-hidden="true"></i>3. Aufgabe: Container mit Volume und Portfreigabe erstellen
+
+Nun soll der Port `8081` des Containers der vorherigen Aufgabe auf einen beliebigen Port des Hosts (Bsp: Port `1234`) freigegeben werden. Zur Überprüfung soll `http://localhost:<Host-Port>` per `curl` abgefragt werden.
+
+</script></section></section><section ><section data-markdown><script type="text/template">
+
+<!-- .slide: class="simple center" -->
+
+## Dockerfile
+
+- Ermöglicht das Erstellen eigener Docker Images<!-- .element: class="fragment" -->
+- somit können komplette Projekte mit allen Abhängigkeiten für andere freigegeben werden<!-- .element: class="fragment" -->
+- Docker Images müssen immer von anderen Images abgeleitet werden<!-- .element: class="fragment" -->
+  - Das "most-basic" Image ist scratch, sollte aber fast nie und nur für kompillierte Binarys benutzt werden
+- Beschreibt die Befehle, die ausgeführt werden, um ein Image zu erstellen und den Befehl, der beim Start eines Containers ausgeführt wird<!-- .element: class="fragment" -->
+
+</script></section><section data-markdown><script type="text/template"><!-- .element: class="fragment" -->
+
+<!-- .slide: data-transition="convex" data-background-transition="scroll" data-background="#efefef" -->
+<!-- .slide: class="explanation center" -->
+
+## Basic-Syntax
+
+```Dockerfile
+FROM <Image Name>
+
+EXPOSE <Portnummer>
+RUN <Auszuführende Befehle, bspw. mkdir>
+COPY <Quelldatei> <Zielpfad>
+WORKDIR <Arbeitsverzeichnis>
+CMD <Startbefehl>
+```
+
+</script></section><section data-markdown><script type="text/template"><!-- .element: class="fragment" -->
+
+<!-- .slide: class="assignment center" -->
+
+## <i class="fa fa-pencil" aria-hidden="true"></i>4. Aufgabe: Dockerfile
+
+Nun soll der Containers der vorherigen Aufgaben mit einer Dockerfile als eigenes Image erstellt werden.
+
+### Hinweis:
+
+Aus Dockerfiles wird mit dem folgenden Befehl ein Image erstellt.
+
+```
+docker build -t <Image Name> .
+```
+
+</script></section></section><section ><section data-markdown><script type="text/template">
+
+<!-- .slide: class="simple center" -->
+
+## Docker Networks
+
+- Container haben isolierte Netzwerke<!-- .element: class="fragment" -->
+- Ports können an den Host freigegeben werden<!-- .element: class="fragment" -->
+- Docker Networks ermöglichen die isolierte Kommunikation zwischen Containern<!-- .element: class="fragment" -->
+
+</script></section><section data-markdown><script type="text/template"><!-- .element: class="fragment" -->
+
+<!-- .slide: class="simple center" -->
+
+## Syntax
+
+```docker
+docker network create <Netzwerk Name>
+docker run --rm -d --network <Netzwerk Name> --name <Container Name> <Image>
+```
+
+</script></section><section data-markdown><script type="text/template"><!-- .element: class="fragment" -->
+
+<!-- .slide: class="assignment center" -->
+
+## <i class="fa fa-pencil" aria-hidden="true"></i>5. Aufgabe: Erstelle Container mit Network
+
+Du sollst nun einen Container erstellen und diesen mit einer Datenbank verbinden. Du kannst hierfür auch gerne ein eigenes, bestehendes Projekt nutzen und dieses in Docker ausführen.
+
+Wenn du bereits eine Datenbank wie MongoDB für Entwicklung auf deinem Gerät installiert hast, kannst du auch diese verwenden und muss keinen eigenen Container für die Datenbank starten. Hierzu setzt du das Network auf `host`, sodass der Container im Netzwerk deines Hosts ist.
+
+</script></section></section><section ><section data-markdown><script type="text/template">
+
+<!-- .slide: class="simple center" -->
+
+## Docker Compose
+
+- Beschreibt die Docker Umgebung<!-- .element: class="fragment" -->
+- erspart Kommandozeilenoptionen und -argumente<!-- .element: class="fragment" -->
+
+</script></section><section data-markdown><script type="text/template"><!-- .element: class="fragment" -->
+
+<!-- .slide: data-transition="convex" data-background-transition="scroll" data-background="#ededed" -->
+<!-- .slide: class="explanation center" -->
+
+## Syntax
+
+```yml
+version: "3.3"
+
+services:
+    db:
+        image: <image-name>
+        volumes:
+            - <xyz>:</abc>
+        restart: always
+    server:
+        depends_on:
+            - db
+        ports:
+            -"<local>:<container>"
+        networks:
+            - web
+        build:
+            context: ./
+            dockerfile: Dockerfile
+networks:
+        web:
+```
+
+</script></section><section data-markdown><script type="text/template"><!-- .element: class="fragment" -->
+
+<!-- .slide: class="simple center" -->
+
+## Befehle
+
+### Umgebung starten
+`docker-compose up`
+
+### Umgebung stoppen
+
+`docker-compose down`
+
+### Komponenten der Umgebung starten
+
+`docker-compose up server`
+
+</script></section><section data-markdown><script type="text/template"><!-- .element: class="fragment" -->
+
+<!-- .slide: class="assignment center" -->
+
+## <i class="fa fa-pencil" aria-hidden="true"></i>6. Aufgabe: Docker Compose nutzen
+
+Schreibe eine `docker-compose.yml`-Datei und starte die Dockerfile aus der vorherigen Aufgabe mit `docker-compose up`.
+
+</script></section><section data-markdown><script type="text/template"><!-- .element: class="fragment" -->
+
+<!-- .slide: class="simple center" -->
+
+## Umgebungsvariablen
+
+1. Passwörter etc. werden mittels Umgebungsvariablen an Container übergeben
+2. Syntax in CLI: `-e NAME=wert`
+
+```
+docker run -it -e NAME=wert ubuntu /bin/bash
+```
+
+1. Syntax in `docker-compose.yml`:
+
+```
+db:
+        image: <image-name>
+        volumes:
+            - <xyz>:</abc>
+        restart: always
+        environment:
+            PASSWORD: <sicheres-passwort>
+```
+
+</script></section><section data-markdown><script type="text/template"><!-- .element: class="fragment" -->
+
+<!-- .slide: class="assignment center" -->
+
+## <i class="fa fa-pencil" aria-hidden="true"></i>7. Aufgabe: WordPress mit Docker Compose nutzen
+
+1. Entwickle eine `docker-compose.yml`-Datei für eine WordPress-Installation und starte diese.
+
+#### Hinweise:
+1. Benutze die Images `mysql:5.7` und `wordpress`.
+1. Das MySQL-Image benötigt folgende Umgebungsvariablen für die Zugangsdaten:
+   - MYSQL_ROOT_PASSWORD
+   - MYSQL_DATABASE
+   - MYSQL_USER
+   - MYSQL_PASSWORD
+
+</script></section></section><section ><section data-markdown><script type="text/template">
+
+<!-- .slide: data-background="img/teaser.jpg" -->
+<!-- .slide: class="image-fullscreen center" -->
+
+
+## Das sind Container. Das ist Docker.
+
+</script></section><section data-markdown><script type="text/template"><!-- .element: class="fragment" -->
+
+<!-- .slide: data-background="#9313CE" -->
+<!-- .slide: class="outro center" -->
+
+## Danke für's Mitmachen
+und noch viel Spaß mit Docker
+</script></section></section></div>
+        </div>
+
+        <script src="./lib/js/head.min.js"></script>
+        <script src="./js/reveal.js"></script>
+
+        <script>
+            function extend() {
+              var target = {};
+              for (var i = 0; i < arguments.length; i++) {
+                var source = arguments[i];
+                for (var key in source) {
+                  if (source.hasOwnProperty(key)) {
+                    target[key] = source[key];
+                  }
+                }
+              }
+              return target;
+            }
+
+            // Optional libraries used to extend on reveal.js
+            var deps = [
+              { src: './lib/js/classList.js', condition: function() { return !document.body.classList; } },
+              { src: './plugin/markdown/marked.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
+              { src: './plugin/markdown/markdown.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
+              { src: './plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+              { src: './plugin/zoom-js/zoom.js', async: true },
+              { src: './plugin/notes/notes.js', async: true },
+              { src: './plugin/math/math.js', async: true }
+            ];
+
+            // default options to init reveal.js
+            var defaultOptions = {
+              controls: true,
+              progress: true,
+              history: true,
+              center: true,
+              transition: 'default', // none/fade/slide/convex/concave/zoom
+              dependencies: deps
+            };
+
+            // options from URL query string
+            var queryOptions = Reveal.getQueryHash() || {};
+
+            var options = {"transition":"slide","backgroundTransition":"zoom","center":false};
+            options = extend(defaultOptions, options, queryOptions);
+        </script>
+
+          <script src="./_assets/core/reveal-md-add-icons.js"></script>
+
+        <script>
+            Reveal.initialize(options);
+        </script>
+    </body>
+</html>

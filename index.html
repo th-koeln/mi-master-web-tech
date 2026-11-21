@@ -1,0 +1,87 @@
+---
+layout: home
+title: Web-Technologien
+---
+<section class="section">
+  <h2 class="title">Über das Modul</h2>
+  <hr>
+  <div class="content" data-grid>
+
+    <div class="text-hero">
+      <p>Das Modul <strong>Web-Technologien</strong> (<span lang="en">Web Technologies</span>) gehört zum Master Medieninformatik und zum Master Digital Sciences. Sie beschäftigen sich mit fortgeschrittenen Herangehensweisen, Technologien und Konzepten für Web-Anwendungen. Sie erkunden neue Strömungen im Web, geben Ihr Wissen in einem eigenen <a href="#workshops">Workshop</a> weiter und entwickeln über das Semester ein <a href="{{ '/projekte/' | relative_url }}">Beiboot-Projekt</a>, das auf neue Feature Requests reagieren muss.</p>
+      <p>Die Veranstaltung findet im {{ site.semester }} dienstags statt. Alle Termine finden Sie im <a href="{{ '/zeitplan/' | relative_url }}">Zeitplan</a>. Bitte melden Sie sich im <a href="https://ilu.th-koeln.de/ilias.php?baseClass=ilrepositorygui&amp;cmdNode=yy:n7&amp;cmdClass=ilObjCourseGUI&amp;cmd=view&amp;ref_id=788865">Kurs im ILU</a> an.</p>
+    </div>
+
+    <h2>Worum geht es?</h2>
+    <p>Die Veranstaltung erweitert Ihre Kompetenzen in diesen Bereichen:</p>
+    <ul>
+      <li>individuelle Web-Coding-Skills</li>
+      <li>professionelle Technologieentscheidungen und ihre Dokumentation</li>
+      <li>Kommunikations- und Diskussionsfähigkeit</li>
+      <li>nachhaltige technische Ausrichtung eines Web-Projekts</li>
+      <li>nachhaltige Entwicklung web-basierter Systeme</li>
+      <li>eigenständige Einarbeitung in neue Technologien</li>
+      <li>Coaching-Skills</li>
+    </ul>
+
+    <h2>Eckdaten</h2>
+    <dl>
+      <dt>Kreditpunkte</dt><dd>6 ECTS</dd>
+      <dt>Lehrform</dt><dd>4 SWS: Seminar 2 SWS, Workshop 2 SWS</dd>
+      <dt>Arbeitsaufwand</dt><dd>180 Stunden, davon 36 h Seminar, 36 h Workshop, 108 h Selbststudium</dd>
+      <dt>Sprache</dt><dd>Deutsch</dd>
+    </dl>
+
+    <h2>Workshop</h2>
+    <p>Sie recherchieren eine neue Technologie oder Strömung im Web, ordnen sie ein und vermitteln sie Ihren Kommiliton:innen in einem Workshop von höchstens 180 Minuten. Zu jedem Workshop gehört ein öffentliches Abstract, das Sie mindestens eine Woche vorher per Pull Request einreichen.</p>
+    <ul>
+      <li><a href="{{ '/workshop-tipps/' | relative_url }}">Guidelines für die Workshop-Gestaltung</a></li>
+      <li><a href="{{ '/workshop-abstract/' | relative_url }}">Workshop-Abstract einreichen</a></li>
+    </ul>
+
+    <h2>Beiboot-Projekt</h2>
+    <p>Parallel zum Modul entwickeln Sie ein Projekt zu einem vorgegebenen Thema. Alle zwei bis drei Wochen kommen neue Features hinzu, die Sie integrieren. In gemeinsamen Code-Reviews vergleichen wir, wie verschiedene Entwickler:innen dasselbe Feature umsetzen, und diskutieren Technologie- und Implementierungsentscheidungen. Mehr dazu auf der Seite <a href="{{ '/projekte/' | relative_url }}">Projekte</a>.</p>
+
+    <h2>Prüfung und Bewertung</h2>
+    <p>Die Prüfungsleistung besteht aus dem <strong>Workshop</strong> und dem fortlaufenden <strong>Beiboot-Projekt</strong> zu je 50 %. Zum Abschluss stellen Sie in einer mündlichen Prüfung Ihr Beiboot-Projekt vor und reflektieren Ihren Workshop.</p>
+    <ul>
+      <li><a href="{{ '/bewertungskriterien/#workshop' | relative_url }}">Bewertungskriterien Workshop</a></li>
+      <li><a href="{{ '/bewertungskriterien/#beiboot-projekt' | relative_url }}">Bewertungskriterien Beiboot-Projekt</a></li>
+    </ul>
+
+    <h2>Was sollten Sie mitbringen?</h2>
+    <p>Das Modul setzt einschlägige Kenntnisse und Erfahrungen in Web-Technologien und Web-Development voraus. Was genau damit gemeint ist, steht unter <a href="{{ '/voraussetzungen/' | relative_url }}">Empfohlene Voraussetzungen</a>.</p>
+
+    <h2>Spielregeln</h2>
+    <p>Das Modul lebt vom Austausch. Ich erwarte von allen Teilnehmer:innen:</p>
+    <ul>
+      <li>einen freundlichen, offenen und professionellen Umgang</li>
+      <li>Commitment und Leistungsbereitschaft</li>
+      <li>Unterstützung und Kommunikation untereinander</li>
+      <li>offene Ansprache von Kritik oder Problemen</li>
+      <li>Verantwortungsbewusstsein</li>
+      <li>Wertschätzung</li>
+      <li>Anwesenheit und Teilnahme</li>
+    </ul>
+    <p>Das Modul war bisher Teil des Schwerpunkts <a href="https://th-koeln.github.io/mi-master-wtw/">Weaving the Web</a>.</p>
+  </div>
+</section>
+
+{%- assign workshops = site.workshops | where_exp: "w", "w.published != false" | sort: "datum" | reverse -%}
+{%- assign jahre = workshops | group_by_exp: "w", "w.datum | date: '%Y'" -%}
+<section class="section" id="workshops">
+  <div class="content">
+    <h2 class="title">Workshops</h2>
+    <div class="text-hero">
+      <p>{{ workshops.size }} Workshops seit {{ jahre.last.name }}: Hier sehen Sie, welche Themen Studierende in den vergangenen Semestern aufbereitet und vermittelt haben.</p>
+    </div>
+  </div>
+  {%- for jahr in jahre %}
+  <div class="project-year-group">
+    <h3 class="project-year">{{ jahr.name }}</h3>
+    <ul class="project-list">
+      {%- for w in jahr.items %}{% include workshop-card.html workshop=w %}{% endfor %}
+    </ul>
+  </div>
+  {%- endfor %}
+</section>
